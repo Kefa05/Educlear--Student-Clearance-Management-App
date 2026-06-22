@@ -1,8 +1,8 @@
 name: Update date every Tuesday
 on:
   schedule:
-    - cron: '0 0 * 2'  # runs every Tuesday at 00:00 UTC
-  workflow_dispatch:     # lets you run it manually too
+    - cron: '0 0 * 2'  # runs every Tuesday at 00:00 UTC = 3:00 AM Kenya time
+  workflow_dispatch:   # lets you run it manually from Actions tab
 
 jobs:
   update:
