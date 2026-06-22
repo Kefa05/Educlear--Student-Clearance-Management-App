@@ -1,0 +1,23 @@
+name: Update date every Tuesday
+on:
+  schedule:
+    - cron: '0 0 * 2'  # runs every Tuesday at 00:00 UTC
+  workflow_dispatch:     # lets you run it manually too
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Update date in README.md
+        run: |
+          sed -i "s/Last updated: .*/Last updated: $(date +'%B %d, %Y')/" README.md
+      
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add README.md
+          git commit -m "Update date to $(date +'%B %d, %Y')" || exit 0
+          git push
